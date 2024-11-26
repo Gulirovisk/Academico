@@ -101,10 +101,11 @@ class Areas_Saber(models.Model):
 
 class Curso(models.Model):
     nome = models.CharField(max_length=100)
+    instituicao = models.ForeignKey(Instituicao, on_delete=models.CASCADE, verbose_name='Instituição')
     carga_horaria_total = models.PositiveIntegerField()
     duracao_meses = models.PositiveSmallIntegerField()
-    area_saber = models.ForeignKey(Areas_Saber, on_delete=models.CASCADE, verbose_name='Área do Saber')
-    instituicao = models.ForeignKey(Instituicao, on_delete=models.CASCADE, verbose_name='Instituição')
+    area_saber = models.ManyToManyField(Areas_Saber, verbose_name='Área do Saber')
+    disciplinas = models.ManyToManyField('Disciplina', verbose_name='Disciplinas')
 
     class Meta:
         verbose_name = 'Curso'
@@ -129,6 +130,7 @@ class Turno(models.Model):
 class Disciplina(models.Model):
     nome = models.CharField(max_length=100)
     area_saber = models.ForeignKey(Areas_Saber, on_delete=models.CASCADE, verbose_name='Área do Saber')
+    estudantes = models.ManyToManyField(Aluno, through='Matricula', related_name='Disciplinas', verbose_name='Estudantes')
 
     class Meta:
         verbose_name = 'Disciplina'
@@ -150,9 +152,10 @@ class Tipo_Avaliacao(models.Model):
 
 
 class Avaliacao(models.Model):
-    descricao = models.TextField()
+    descricao = models.TextField( blank=True, null=True, verbose_name='Descrição', help_text='Descrição da avaliação')
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name='Curso')
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, verbose_name='Disciplina')
+    estudante = models.ForeignKey(Aluno, on_delete=models.CASCADE, verbose_name='Estudante')
     nota = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True, verbose_name='Nota')
     tipo_avaliacao = models.ForeignKey(Tipo_Avaliacao, on_delete=models.CASCADE, verbose_name='Tipo de Avaliação')
 
@@ -167,6 +170,7 @@ class Avaliacao(models.Model):
 # === Matrículas, Frequências e Turmas ===
 class Matricula(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, verbose_name='Aluno', null=True, blank=True)
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, verbose_name='Disciplina', related_name='matriculas')
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name='Curso')
     instituicao = models.ForeignKey(Instituicao, on_delete=models.CASCADE, verbose_name='Instituição')
     data_inicio = models.DateField(blank=True, null=True, verbose_name='Data de Início', default='2000-01-01')
@@ -177,13 +181,13 @@ class Matricula(models.Model):
         verbose_name_plural = 'Matrículas'
 
     def __str__(self):
-        return f'{self.aluno} - {self.curso}'
+        return f'{self.aluno} - {self.disciplina} -  {self.curso}'
 
 
 class Frequencia(models.Model):
+    estudante = models.ForeignKey(Aluno, on_delete=models.CASCADE, verbose_name='Estudante', related_name='frequencias_estudante')
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name='Curso')
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, verbose_name='Disciplina')
-    pessoa = models.ForeignKey(Aluno, on_delete=models.CASCADE, verbose_name='Aluno', null=True, blank=True)
     numero_faltas = models.PositiveSmallIntegerField()
 
     class Meta:
@@ -191,13 +195,14 @@ class Frequencia(models.Model):
         verbose_name_plural = 'Frequências'
 
     def __str__(self):
-        return f'{self.pessoa} - {self.curso} - {self.disciplina}'
+        return f'{self.estudante} - {self.curso} - {self.disciplina} - {self.numero_faltas}'
 
 
 class Turma(models.Model):
     nome = models.CharField(max_length=100)
     turno = models.ForeignKey(Turno, on_delete=models.CASCADE, verbose_name='Turno')
-
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name='Curso')
+    alunos = models.ManyToManyField(Aluno, verbose_name='Alunos', blank=True)
     class Meta:
         verbose_name = 'Turma'
         verbose_name_plural = 'Turmas'
