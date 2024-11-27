@@ -12,7 +12,4 @@ urlpatterns = [
     path('avaliacoes/', views.AvaliacoesView.as_view(), name='avaliacoes'),
     path('frequencias/', views.FrequenciasView.as_view(), name='frequencias'),
     path('ocorrencias/', views.OcorrenciasView.as_view(), name='ocorrencias'),
-
-
-    
 ]

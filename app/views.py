@@ -11,7 +11,7 @@ class IndexView(View):
 class CursosView(View):
     def get(self, request, *args, **kwargs):
         cursos = Curso.objects.all()
-        return render(request, 'curso.html', {'cursos': Curso})
+        return render(request, 'curso.html', {'cursos': cursos})
 
 class InstituicoesView(View):
     def get(self, request, *args, **kwargs):
