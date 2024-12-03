@@ -47,6 +47,27 @@ min.css">
             </ul>
         </div>
     </nav>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Professores</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Ocupação</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for professor in professores %}
+                <tr>
+                    <td>{{ professor.nome }}</td>
+                    <td>{{ professor.ocupacao }}</td>
+                    <td>{{ professor.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     
 </body>
 </html>

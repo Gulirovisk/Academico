@@ -47,6 +47,29 @@ min.css">
             </ul>
         </div>
     </nav>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Ocorrencias</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Data</th>
+                    <th>Curso</th>
+                    <th>Disciplina</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ocorrencia in ocorrencias %}
+                <tr>
+                    <td>{{ ocorrencia.descricao }}</td>
+                    <td>{{ ocorrencia.data }}</td>
+                    <td>{{ ocorrencia.curso.nome }}</td>
+                    <td>{{ ocorrencia.disciplina.nome}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     
 </body>
 </html>

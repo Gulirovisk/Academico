@@ -47,6 +47,29 @@ min.css">
             </ul>
         </div>
     </nav>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Frequencia</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Ocupação</th>
+                    <th>Registro Academico</th>
+                    <th>Numero de Faltas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for frequencia in frequencias %}
+                <tr>
+                    <td>{{ frequencia.estudante.nome }}</td>
+                    <td>{{ frequencia.estudante.ocupacao }}</td>
+                    <td>{{ frequencia.estudante.ra }}</td>
+                    <td>{{ frequencia.numero_faltas}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     
 </body>
 </html>

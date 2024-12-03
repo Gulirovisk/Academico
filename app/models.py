@@ -112,7 +112,7 @@ class Curso(models.Model):
         verbose_name_plural = 'Cursos'
 
     def __str__(self):
-        return f'{self.nome} - {self.area_saber} - {self.instituicao}'
+        return f'{self.nome} - {self.instituicao}'
 
 
 # === Turnos, Disciplinas e Avaliações ===
