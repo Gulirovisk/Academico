@@ -49,24 +49,26 @@ min.css">
     </nav>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Lista de Instituições</h1>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>Telefone</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for instituicao in instituicoes %}
-                <tr>
-                    <td>{{ instituicao.nome }}</td>
-                    <td>{{ instituicao.cidade }}</td>
-                    <td>{{ instituicao.telefone }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        {% for instituicao in instituicoes %}
+        <div class="mb-4">
+            <table class="table table-bordered table-uniform">
+                <tbody> 
+                    <tr>
+                        <td>Nome</td>
+                        <td>{{ instituicao.nome }}</td>
+                    </tr>
+                    <tr>
+                        <td>Endereço</td>
+                        <td>{{ instituicao.cidade }}</td>
+                    </tr>
+                    <tr>
+                        <td>Telefone</td>
+                        <td>{{ instituicao.telefone }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>    
 </body>
 </html>

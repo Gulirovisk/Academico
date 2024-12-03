@@ -7,7 +7,7 @@ class UF(models.Model):
     class Meta:
         verbose_name = 'Unidade Federativa'
         verbose_name_plural = 'Unidades Federativas'
-
+        
     def __str__(self):
         return self.uf
 
