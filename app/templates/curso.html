@@ -60,7 +60,7 @@ min.css">
                         <p class="card-text">{{ curso.descricao }}</p>
                         <button class="btn btn-success" data-toggle="modal" data-target="#courseModal"
                             data-title="{{ curso.nome }}" data-duration="{{ curso.duracao_meses }}"
-                            data-instituicao="{{ curso.instituicao }}" data-area="{% for area in curso.area_saber.all %}{{ area.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}">
+                            data-instituicao="{{ curso.instituicao }}" data-area="{% for area in curso.area_saber.all %}{{ area.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}" data-disciplinas="{% for disciplina in curso.disciplinas.all %}{{ disciplina.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}">
                             Ver Curso
                         </button>
                     </div>
@@ -88,7 +88,8 @@ min.css">
                     <p id="modalCourseDescription"></p>
                     <p><strong>Instituição:</strong> <span id="modalCourseInstituicao"></span></p>
                     <p><strong>Duração:</strong> <span id="modalCourseDuration"></span></p>
-                    <p><strong>Área:</strong> <span id="modalCourseArea"></span></p>
+                    <p><strong>Áreas:</strong> <span id="modalCourseArea"></span></p>
+                    <p><strong>Disciplinas:</strong> <span id="modalCourseDisciplina"></span></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -107,6 +108,7 @@ min.css">
             var duration = button.data('duration');
             var instituicao = button.data('instituicao');
             var area = button.data('area');
+            var disciplinas = button.data('disciplinas');
 
             // Update the modal's content
             var modal = $(this);
@@ -114,6 +116,7 @@ min.css">
             modal.find('#modalCourseDuration').text(duration + ' meses');
             modal.find('#modalCourseInstituicao').text(instituicao);
             modal.find('#modalCourseArea').text(area);
+            modal.find('#modalCourseDisciplina').text(disciplinas);
         });
     </script>
 
