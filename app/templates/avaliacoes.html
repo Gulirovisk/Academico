@@ -47,6 +47,72 @@ min.css">
             </ul>
         </div>
     </nav>
+    <!-- <div class="container mt-4">
+        <h2>Lista de Avaliações</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Curso</th>
+                    <th>Disciplina</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for avaliacao in avaliacoes %}
+                <tr>
+                    <td>{{ avaliacao.descricao }}</td>
+                    <td>{{ avaliacao.curso }}</td>
+                    <td>{{ avaliacao.disciplina }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Avaliações Disponiveis</h1>
+        <div class="row">
+            {% for avaliacao in avaliacoes %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ avaliacao.descricao }}</h5>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#avaliacaoModal{{ avaliacao.id }}">
+                        Ver Avaliação
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="avaliacaoModal{{ avaliacao.id }}" tabindex="-1" role="dialog" aria-labelledby="avaliacaoModalLabel{{ avaliacao.id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="avaliacaoModalLabel{{ avaliacao.id }}">{{ avaliacao.descricao }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Curso:</strong> {{ avaliacao.curso }}</p>
+                            <p><strong>Disciplina:</strong> {{ avaliacao.disciplina }}</p>
+                            <p><strong>Descrição:</strong> {{ avaliacao.descricao }}</p>
+                            <!-- Add more details as needed -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
 </body>
 </html>

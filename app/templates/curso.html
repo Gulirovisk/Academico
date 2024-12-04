@@ -57,7 +57,7 @@ min.css">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ curso.nome }}</h5>
-                        <p class="card-text">{{ curso.descricao }}</p>
+                        <p class="card-text">{{ curso.instituicao.nome|default:"Instituição não informada" }}</p>
                         <button class="btn btn-success" data-toggle="modal" data-target="#courseModal"
                             data-title="{{ curso.nome }}" data-duration="{{ curso.duracao_meses }}"
                             data-instituicao="{{ curso.instituicao }}" data-area="{% for area in curso.area_saber.all %}{{ area.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}" data-disciplinas="{% for disciplina in curso.disciplinas.all %}{{ disciplina.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}">

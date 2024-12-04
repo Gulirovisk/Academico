@@ -7,7 +7,7 @@ class UF(models.Model):
     class Meta:
         verbose_name = 'Unidade Federativa'
         verbose_name_plural = 'Unidades Federativas'
-
+        
     def __str__(self):
         return self.uf
 
@@ -112,7 +112,7 @@ class Curso(models.Model):
         verbose_name_plural = 'Cursos'
 
     def __str__(self):
-        return f'{self.nome} - {self.area_saber} - {self.instituicao}'
+        return f'{self.nome} - {self.instituicao}'
 
 
 # === Turnos, Disciplinas e Avaliações ===

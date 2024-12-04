@@ -47,6 +47,30 @@ min.css">
             </ul>
         </div>
     </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Turmas</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Turno</th>
+                    <th>Curso</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for turmas in turmas %}
+                <tr>
+                    <td>{{ turmas.nome }}</td>
+                    <td>{{ turmas.turno }}</td>
+                    <td>{{ turmas.curso }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
     
 </body>
 </html>
